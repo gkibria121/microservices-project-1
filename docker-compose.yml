@@ -1,0 +1,41 @@
+services:
+  frontend:
+    build: 
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # Ignore local node_modules
+    ports:
+      - 3000:5173
+ 
+  post-creation-service:
+    build: 
+      context: ./post-creation-service/
+      dockerfile: Dockerfile
+    
+    volumes:
+      - ./post-creation-service:/app
+      - /app/node_modules  # Ignore local node_modules
+    ports:
+      - 3001:3000
+ 
+  comment-creation-service:
+    build: 
+      context: ./comment-creation-service/
+      dockerfile: Dockerfile
+    
+    volumes:
+      - ./comment-creation-service:/app
+      - /app/node_modules  # Ignore local node_modules
+    ports:
+      - 3002:3000
+  query-service:
+    build: 
+      context: ./query-service/
+      dockerfile: Dockerfile
+    volumes:
+      - ./query-service:/app
+      - /app/node_modules  # Ignore local node_modules
+    ports:
+      - 3003:3000
