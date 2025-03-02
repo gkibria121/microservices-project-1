@@ -4,6 +4,7 @@ export type PostWithoutId = {
 
 export type CommentWithoutId = {
   comment: string;
+  postId: string | number;
 };
 export type Comment = CommentWithoutId & {
   id: string | number;

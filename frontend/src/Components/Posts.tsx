@@ -12,7 +12,7 @@ export default function Posts({ posts }: { posts: PostType[] }) {
           <Post post={post} key={post.id}>
             <>
               <CommentList comments={post.comments ?? []} />
-              <CommentCreate />
+              <CommentCreate postId={post.id} />
             </>
           </Post>
         ))}

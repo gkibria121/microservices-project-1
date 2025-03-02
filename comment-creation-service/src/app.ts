@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/comments", (req: Request, res: Response) => {
-  const { comment } = req.body;
+  const { comment, postId } = req.body;
 
   if (!comment) {
     res.status(422).json({
@@ -21,9 +21,18 @@ app.post("/api/comments", (req: Request, res: Response) => {
     });
     return;
   }
+  if (!postId) {
+    res.status(422).json({
+      errors: {
+        comment: "postId is required",
+      },
+    });
+    return;
+  }
   const newComment: Comment = {
     id: randomBytes(3).toString("hex"),
-    comment: comment,
+    postId,
+    comment,
   };
   comments.push(newComment);
   res.status(200).json(newComment);
