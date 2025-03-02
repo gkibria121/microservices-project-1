@@ -32,6 +32,26 @@ app.get("/api/posts", (req: Request, resp: Response) => {
   });
 });
 
+app.post("/api/events", (req: Request, resp: Response) => {
+  const { type, data } = req.body;
+  console.log(type, data);
+  if (type === "PostCreated") {
+    posts.push(data as PostType);
+  }
+  if (type === "CommentCreated") {
+    const comment = data;
+    const post = posts.find((e) => {
+      console.log(e);
+      return e.id === comment.postId;
+    });
+    if (!post) {
+      throw new Error("no post avilable!");
+    }
+    post.comments = [...(post?.comments || []), comment];
+  }
+  resp.status(200);
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
