@@ -6,6 +6,9 @@ export const submitComment = async (formdata: FormData) => {
     alert("comment is  missing");
     return;
   }
-
-  await saveComment({ comment });
+  try {
+    await saveComment({ comment });
+  } catch (e) {
+    console.log(e);
+  }
 };
