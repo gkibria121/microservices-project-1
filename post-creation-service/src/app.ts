@@ -1,27 +1,32 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { randomBytes } from "crypto";
+import { PostType } from "./type/app";
 const app = express();
 const port = process.env.PORT || 3000;
-const posts = [];
+const posts: PostType[] = [];
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.post("/api/posts", (req: Request, resp: Response) => {
-  const title = req.body.title;
+app.post("/api/posts", (req: Request, res: Response) => {
+  console.log(req.body);
+  const { title } = req.body;
   if (!title) {
-    resp.status(301).json({
+    res.status(422).json({
       errors: {
         title: "Missing title",
       },
     });
-    process.exit();
+
+    return;
   }
   const post = {
     id: randomBytes(5).toString("hex"),
     title,
   };
-  resp.status(201).json(post);
+
+  posts.push(post);
+  res.status(201).json(post);
 });
 // Start server
 app.listen(port, () => {

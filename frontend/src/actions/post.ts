@@ -6,6 +6,9 @@ export const submitPost = async (formdata: FormData) => {
     alert("Title missing");
     return;
   }
-
-  await savepost({ title });
+  try {
+    await savepost({ title });
+  } catch (error) {
+    console.log(error);
+  }
 };
