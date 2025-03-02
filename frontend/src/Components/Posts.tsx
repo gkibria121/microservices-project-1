@@ -17,6 +17,7 @@ export default function Posts({ posts }: { posts: PostType[] }) {
           </Post>
         ))}
       </div>
+      {posts.length == 0 && <div>No posts available!</div>}
     </>
   );
 }
