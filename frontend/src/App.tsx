@@ -3,7 +3,20 @@ import Posts from "./Components/Posts";
 import { PostType } from "./type/app";
 
 const posts: PostType[] = [
-  { id: "humba", title: "A second Post" },
+  {
+    id: "humba1",
+    title: "A second Post",
+    comments: [
+      {
+        id: 1,
+        comment: "a seccond comment",
+      },
+      {
+        id: 2,
+        comment: "adwasdwawsdwwe",
+      },
+    ],
+  },
   { id: "humba", title: "A third post" },
 ];
 function App() {

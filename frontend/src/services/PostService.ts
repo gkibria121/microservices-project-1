@@ -1,5 +1,5 @@
-import { PostWithOutId } from "../type/app";
+import { PostWithoutId } from "../type/app";
 
-export async function savepost(post: PostWithOutId) {
+export async function savepost(post: PostWithoutId) {
   console.log(post);
 }
