@@ -1,4 +1,4 @@
-import { PostWithoutId } from "../type/app";
+import { PostWithoutId } from "../../../type/app";
 
 export async function savepost(post: PostWithoutId) {
   const response = await fetch("http://localhost:3001/api/posts", {

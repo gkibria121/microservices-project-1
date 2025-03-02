@@ -1,4 +1,4 @@
-import { Comment } from "../type/app";
+import { Comment } from "../../../type/app";
 
 export default function CommentList({ comments }: { comments: Comment[] }) {
   return (

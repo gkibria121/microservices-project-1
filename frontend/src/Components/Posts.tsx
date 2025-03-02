@@ -1,4 +1,4 @@
-import { PostType } from "../type/app";
+import { PostType } from "../../../type/app";
 import CommentCreate from "./CommentCreate";
 import CommentList from "./CommentList";
 import Post from "./Post";

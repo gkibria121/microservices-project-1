@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { randomBytes } from "crypto";
-import { Comment } from "./type/app";
+import { Comment } from "../src/type/app";
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -27,8 +27,27 @@ app.post("/api/comments", (req: Request, res: Response) => {
   };
   comments.push(newComment);
   res.status(200).json(newComment);
+  propagateEvent("CommentCreated", newComment);
 });
 // Start server
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
 });
+
+async function propagateEvent(type: string, data: any) {
+  try {
+    await fetch(`http://event-bus:3000/api/events`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type,
+        data,
+      }),
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}

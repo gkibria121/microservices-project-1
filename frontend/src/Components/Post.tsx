@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { PostType } from "../type/app";
+import { PostType } from "../../../type/app";
 
 function Post({
   children,

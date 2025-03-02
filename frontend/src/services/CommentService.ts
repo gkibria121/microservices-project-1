@@ -1,4 +1,4 @@
-import { CommentWithoutId } from "../type/app";
+import { CommentWithoutId } from "../../../type/app";
 
 export async function saveComment(comment: CommentWithoutId) {
   const respone = await fetch("http://localhost:3002/api/comments", {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PostCreate from "./Components/PostCreate";
 import Posts from "./Components/Posts";
-import { PostType } from "./type/app";
+import { PostType } from "../../type/app";
 import { getPosts } from "./services/PostService";
 
 function App() {
