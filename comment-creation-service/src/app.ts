@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { randomBytes } from "crypto";
 import { Comment } from "../src/type/app";
+import axios from "axios";
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -42,17 +43,15 @@ app.post("/api/comments", (req: Request, res: Response) => {
 
 app.post("/api/events", (req: Request, resp: Response) => {
   const event = req.body;
-  const eventType = event.type;
-  if (eventType === "CommentModerated") {
-    propagateEvent("CommentUpdated", event.data);
-  }
-
+  handleEvents(event);
   resp.status(200);
 });
 
 // Start server
-app.listen(port, () => {
-  console.log(`🚀 Server running on http://localhost:${port}`);
+app.listen(port, async () => {
+  console.log(`🚀; Server running on http://localhost:${port}`);
+  const events = await axios.get("http://event-bus:3000/api/events");
+  console.log(events);
 });
 
 async function propagateEvent(type: string, data: any) {
@@ -70,5 +69,12 @@ async function propagateEvent(type: string, data: any) {
     });
   } catch (e) {
     console.log(e);
+  }
+}
+
+function handleEvents(event: { type: string; data: any }) {
+  const eventType = event.type;
+  if (eventType === "CommentModerated") {
+    propagateEvent("CommentUpdated", event.data);
   }
 }
