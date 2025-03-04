@@ -12,10 +12,12 @@ const posts: PostType[] = [
       {
         id: 1,
         comment: "a seccond comment",
+        status: "accepted",
       },
       {
         id: 2,
         comment: "adwasdwawsdwwe",
+        status: "accepted",
       },
     ],
   },
@@ -48,6 +50,21 @@ app.post("/api/events", (req: Request, resp: Response) => {
       throw new Error("no post avilable!");
     }
     post.comments = [...(post?.comments || []), comment];
+  }
+  if (type === "CommentUpdated") {
+    const newComment = data;
+
+    const post = posts.find((e) => {
+      return e.id === newComment.postId;
+    });
+    if (!post) {
+      throw new Error("no post avilable!");
+    }
+
+    post.comments = post.comments?.map((com) => {
+      if (com.id !== data.id) return com;
+      return data;
+    });
   }
   resp.status(200);
 });

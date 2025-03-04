@@ -8,6 +8,7 @@ export type CommentWithoutId = {
 };
 export type Comment = CommentWithoutId & {
   id: string | number;
+  status: "pending" | "accepted" | "rejected";
 };
 
 export type PostType = {

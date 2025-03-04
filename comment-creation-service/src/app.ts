@@ -33,11 +33,23 @@ app.post("/api/comments", (req: Request, res: Response) => {
     id: randomBytes(3).toString("hex"),
     postId,
     comment,
+    status: "pending",
   };
   comments.push(newComment);
   res.status(200).json(newComment);
   propagateEvent("CommentCreated", newComment);
 });
+
+app.post("/api/events", (req: Request, resp: Response) => {
+  const event = req.body;
+  const eventType = event.type;
+  if (eventType === "CommentModerated") {
+    propagateEvent("CommentUpdated", event.data);
+  }
+
+  resp.status(200);
+});
+
 // Start server
 app.listen(port, () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
