@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { randomBytes } from "crypto";
-import { Comment } from "../src/type/app";
+import { Comment } from "./type/app";
 import axios from "axios";
 const app = express();
 const port = process.env.PORT || 3000;

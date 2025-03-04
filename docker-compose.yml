@@ -14,13 +14,13 @@ services:
     - WATCHPACK_POLLING=true
     - WDS_SOCKET_PORT=0
  
-  post-creation-service:
+  post-service:
     build: 
-      context: ./post-creation-service/
+      context: ./post-service/
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - ./post-creation-service:/app
+      - ./post-service:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3001:3000
@@ -30,13 +30,13 @@ services:
       - WDS_SOCKET_PORT=0
 
 
-  comment-creation-service:
+  comment-service:
     build: 
-      context: ./comment-creation-service/
+      context: ./comment-service/
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - ./comment-creation-service:/app
+      - ./comment-service:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3002:3000

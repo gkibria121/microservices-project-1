@@ -15,8 +15,8 @@ app.use(express.json());
 //routes
 app.post("/api/events", (req: Request, resp: Response) => {
   const event = req.body as EventType;
-  propagateEvent("http://comment-creation-service:3000/api/events", event);
-  // propagateEvent("http://post-creation-service:3000/api/events", req.body);
+  propagateEvent("http://comment-service:3000/api/events", event);
+  // propagateEvent("http://post-service:3000/api/events", req.body);
   propagateEvent("http://query-service:3000/api/events", event);
   propagateEvent("http://comment-moderation-service:3000/api/events", event);
   events.push(event);
