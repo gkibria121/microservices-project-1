@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { randomBytes } from "crypto";
 import { PostType } from "../type/app";
+import axios from 'axios'
 const app = express();
 const port = process.env.PORT || 3000;
 const posts: PostType[] = [];
@@ -30,8 +31,10 @@ app.post("/api/posts", async (req: Request, res: Response) => {
   propagateEvent("PostCreated", post);
 });
 // Start server
-app.listen(port, () => {
+app.listen(port, async() => {
   console.log(`🚀 Server running on http://localhost:${port}`);
+  const {data} = await axios.get('http://event-bus-service:3000/api/events');
+  console.log(data)
 });
 
 async function propagateEvent(type: string, data: any) {

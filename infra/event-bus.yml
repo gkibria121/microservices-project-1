@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus
+spec:
+  selector:
+    matchLabels:
+      app: event-bus
+  template:
+    metadata:
+      labels:
+        app: event-bus
+    spec:
+      containers:
+      - name: event-bus
+        image: gkibria121/event-bus
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m" 
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-service
+spec:
+  selector:
+    app: event-bus
+  ports:
+  - port: 3000
+    targetPort: 3000

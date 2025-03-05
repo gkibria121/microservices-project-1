@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post
+spec:
+  selector:
+    matchLabels:
+      app: post
+  template:
+    metadata:
+      labels:
+        app: post
+    spec:
+      containers:
+      - name: post
+        image: gkibria121/post-service
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m" 
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-service
+spec:
+  selector:
+    app: post
+  ports:
+  - port: 3000
+    targetPort: 3000
