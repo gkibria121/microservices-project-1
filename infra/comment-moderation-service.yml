@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: event-bus
+  name: comment-moderation-depl
 spec:
   selector:
     matchLabels:
-      app: event-bus
+      app: comment-moderation-service
   template:
     metadata:
       labels:
-        app: event-bus
+        app: comment-moderation-service
     spec:
       containers:
-      - name: event-bus
-        image: gkibria121/event-bus
+      - name: comment-moderation-service
+        image: gkibria121/comment-moderation-service
         resources:
           limits:
             memory: "512Mi"
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: event-bus
+  name: comment-moderation-service
 spec:
   selector:
-    app: event-bus
+    app: comment-moderation-service
   ports:
   - port: 3000
     targetPort: 3000

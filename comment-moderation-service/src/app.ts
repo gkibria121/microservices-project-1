@@ -20,7 +20,7 @@ app.listen(port, async () => {
   console.log(`🚀 Server running on http://localhost:${port}`);
   const {
     data: { events },
-  } = await axios.get("http:event-bus:3000/api/events");
+  } = await axios.get("http://event-bus:3000/api/events");
   events.forEach((event: { type: string; data: any }) => handleEvents(event));
 });
 

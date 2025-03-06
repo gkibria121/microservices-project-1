@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: event-bus
+  name: frontend
 spec:
   selector:
     matchLabels:
-      app: event-bus
+      app: frontend
   template:
     metadata:
       labels:
-        app: event-bus
+        app: frontend
     spec:
       containers:
-      - name: event-bus
-        image: gkibria121/event-bus
+      - name: frontend
+        image: gkibria121/frontend
         resources:
           limits:
             memory: "512Mi"
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: event-bus
+  name: frontend
 spec:
   selector:
-    app: event-bus
+    app: frontend
   ports:
   - port: 3000
     targetPort: 3000
