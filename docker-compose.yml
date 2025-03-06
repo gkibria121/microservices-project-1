@@ -2,88 +2,69 @@ services:
   frontend:
     build: 
       context: ./frontend/
-      dockerfile: Dockerfile
+      dockerfile: ../dockerfiles/Dockerfile
     volumes:
       - ./frontend:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3000:5173
     restart: always
-    environment:
-    - CHOKIDAR_USEPOLLING=true
-    - WATCHPACK_POLLING=true
-    - WDS_SOCKET_PORT=0
+ 
  
   post-service:
     build: 
       context: ./post-service/
-      dockerfile: Dockerfile
+      dockerfile: ../dockerfiles/Dockerfile
     restart: always
     volumes:
       - ./post-service:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3001:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
-      - WDS_SOCKET_PORT=0
-
+ 
 
   comment-service:
     build: 
       context: ./comment-service/
-      dockerfile: Dockerfile
+      dockerfile: ../dockerfiles/Dockerfile
     restart: always
     volumes:
       - ./comment-service:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3002:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
-      - WDS_SOCKET_PORT=0
+ 
   query-service:
     build: 
       context: ./query-service/
-      dockerfile: Dockerfile
+      dockerfile: ../dockerfiles/Dockerfile
     restart: always
     volumes:
       - ./query-service:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3003:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
-      - WDS_SOCKET_PORT=0
+ 
   event-bus:
     build: 
       context: ./event-bus/
-      dockerfile: Dockerfile
+      dockerfile: ../dockerfiles/Dockerfile
     restart: always
     volumes:
       - ./event-bus:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3005:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
-      - WDS_SOCKET_PORT=0
+ 
 
   comment-moderation-service:
     build: 
       context: ./comment-moderation-service/
-      dockerfile: Dockerfile
+      dockerfile: ../dockerfiles/Dockerfile
     restart: always
     volumes:
       - ./comment-moderation-service:/app
       - /app/node_modules  # Ignore local node_modules
     ports:
       - 3006:3000
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
-      - WDS_SOCKET_PORT=0
+ 
