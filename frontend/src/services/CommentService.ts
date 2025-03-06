@@ -1,7 +1,7 @@
 import { CommentWithoutId } from "../../../type/app";
 
 export async function saveComment(comment: CommentWithoutId) {
-  const respone = await fetch("http://localhost:3002/api/comments", {
+  const respone = await fetch("/api/comments", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

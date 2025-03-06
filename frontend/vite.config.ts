@@ -8,5 +8,6 @@ export default defineConfig({
     host: "0.0.0.0", // Ensure it listens on all interfaces
     port: 5173, // Ensure port matches docker-compose
     strictPort: true,
+    allowedHosts : ['posts.com']
   },
 });

@@ -9,7 +9,7 @@ const posts: PostType[] = [];
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.post("/api/posts", async (req: Request, res: Response) => {
+app.post("/api/posts/create", async (req: Request, res: Response) => {
   console.log(req.body);
   const { title } = req.body;
   if (!title) {
@@ -30,6 +30,7 @@ app.post("/api/posts", async (req: Request, res: Response) => {
   res.status(201).json(post);
   propagateEvent("PostCreated", post);
 });
+
 // Start server
 app.listen(port, async() => {
   console.log(`🚀 Server running on http://localhost:${port}`);
