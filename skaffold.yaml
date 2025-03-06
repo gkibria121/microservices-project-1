@@ -1,11 +1,11 @@
 apiVersion: skaffold/v4beta12
 kind: Config
 metadata:
-  name: microservices-project--
+  name: microservices-project
 build:
   local:
     push: false
-
+    useDockerCLI: true
   artifacts:
     - image: gkibria121/comment-moderation-service
       context: comment-moderation-service 
@@ -13,8 +13,8 @@ build:
         dockerfile: ../dockerfiles/Dockerfile 
       sync:
         manual:
-          - dest: .
-            src: 'src/**/*.js'
+          - src: 'src/**/*.(js|ts)'
+            dest: .
  
     - image: gkibria121/comment-service
       context: comment-service
@@ -22,8 +22,8 @@ build:
         dockerfile: ../dockerfiles/Dockerfile 
       sync:
         manual:
-          - dest: .
-            src: 'src/**/*.js'
+          - src: 'src/**/*.(js|ts)'
+            dest: .
 
     - image: gkibria121/event-bus
       context: event-bus
@@ -31,16 +31,17 @@ build:
         dockerfile: ../dockerfiles/Dockerfile 
       sync:
         manual:
-          - dest: .
-            src: 'src/**/*.js'
+          - src: 'src/**/*.(js|ts)'
+            dest: .
+
     - image: gkibria121/frontend
       context: frontend
       docker:
         dockerfile: ../dockerfiles/Dockerfile 
       sync:
         manual:
-          - dest: .
-            src: 'src/**/*.(js|jsx|ts|tsx)'
+          - src: 'src/**/*.(js|jsx|ts|tsx|css)'
+            dest: .
 
     - image: gkibria121/post-service
       context: post-service
@@ -48,8 +49,8 @@ build:
         dockerfile: ../dockerfiles/Dockerfile 
       sync:
         manual:
-          - dest: .
-            src: 'src/**/*.js'
+          - src: 'src/**/*.(js|ts)'
+            dest: .
 
     - image: gkibria121/query-service
       context: query-service
@@ -57,14 +58,16 @@ build:
         dockerfile: ../dockerfiles/Dockerfile 
       sync:
         manual:
-          - dest: .
-            src: 'src/**/*.js'
+          - src: 'src/**/*.(js|ts)'
+            dest: .
+ 
+
 manifests:
   rawYaml:
-    - infra/comment-moderation-service.yml
-    - infra/comment-service.yml
-    - infra/event-bus.yml
-    - infra/frontend.yml
-    - infra/ingress.yml
-    - infra/post-depl.yml
-    - infra/query.yml
+      - infra/comment-moderation-service.yml
+      - infra/comment-service.yml
+      - infra/event-bus.yml
+      - infra/frontend.yml
+      - infra/ingress.yml
+      - infra/post-depl.yml
+      - infra/query.yml
