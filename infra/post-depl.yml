@@ -14,6 +14,7 @@ spec:
       containers:
       - name: post
         image: gkibria121/post-service
+        imagePullPolicy: Never
         resources:
           limits:
             memory: "512Mi"

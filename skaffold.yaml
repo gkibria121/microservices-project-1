@@ -1,0 +1,70 @@
+apiVersion: skaffold/v4beta12
+kind: Config
+metadata:
+  name: microservices-project--
+build:
+  local:
+    push: false
+
+  artifacts:
+    - image: gkibria121/comment-moderation-service
+      context: comment-moderation-service 
+      docker:
+        dockerfile: ../dockerfiles/Dockerfile 
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.js'
+ 
+    - image: gkibria121/comment-service
+      context: comment-service
+      docker:
+        dockerfile: ../dockerfiles/Dockerfile 
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.js'
+
+    - image: gkibria121/event-bus
+      context: event-bus
+      docker:
+        dockerfile: ../dockerfiles/Dockerfile 
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.js'
+    - image: gkibria121/frontend
+      context: frontend
+      docker:
+        dockerfile: ../dockerfiles/Dockerfile 
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.(js|jsx|ts|tsx)'
+
+    - image: gkibria121/post-service
+      context: post-service
+      docker:
+        dockerfile: ../dockerfiles/Dockerfile 
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.js'
+
+    - image: gkibria121/query-service
+      context: query-service
+      docker:
+        dockerfile: ../dockerfiles/Dockerfile 
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.js'
+manifests:
+  rawYaml:
+    - infra/comment-moderation-service.yml
+    - infra/comment-service.yml
+    - infra/event-bus.yml
+    - infra/frontend.yml
+    - infra/ingress.yml
+    - infra/post-depl.yml
+    - infra/query.yml

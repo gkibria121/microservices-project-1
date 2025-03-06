@@ -14,12 +14,12 @@ spec:
       containers:
       - name: event-bus
         image: gkibria121/event-bus
+        imagePullPolicy: Never
         resources:
           limits:
             memory: "512Mi"
             cpu: "500m" 
-
-
+ 
 ---
 
 
