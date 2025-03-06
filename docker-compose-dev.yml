@@ -1,0 +1,66 @@
+services:
+  frontend:
+    build: 
+      context: ./frontend/
+      dockerfile: ../dockerfiles/Dockerfile
+    volumes:
+      - ./frontend:/app 
+    ports:
+      - 3000:5173
+    restart: always
+    command: sh -c "npm install && npm run dev"
+ 
+  post-service:
+    build: 
+      context: ./post-service/
+      dockerfile: ../dockerfiles/Dockerfile
+    restart: always
+    volumes:
+      - ./post-service:/app 
+    ports:
+      - 3001:3000
+    command: sh -c "npm install && npm run dev"
+
+  comment-service:
+    build: 
+      context: ./comment-service/
+      dockerfile: ../dockerfiles/Dockerfile
+    restart: always
+    volumes:
+      - ./comment-service:/app 
+    ports:
+      - 3002:3000
+    command: sh -c "npm install && npm run dev"
+  query-service:
+    build: 
+      context: ./query-service/
+      dockerfile: ../dockerfiles/Dockerfile
+    restart: always
+    volumes:
+      - ./query-service:/app 
+    ports:
+      - 3003:3000
+    command: sh -c "npm install && npm run dev"
+  event-bus:
+    build: 
+      context: ./event-bus/
+      dockerfile: ../dockerfiles/Dockerfile
+    restart: always
+    volumes:
+      - ./event-bus:/app 
+    ports:
+      - 3005:3000
+ 
+    command: sh -c "npm install && npm run dev"
+  comment-moderation-service:
+    build: 
+      context: ./comment-moderation-service/
+      dockerfile: ../dockerfiles/Dockerfile
+    restart: always
+    volumes: 
+      - ./comment-moderation-service:/app
+       
+    ports:
+      - 3006:3000
+    command: sh -c "npm install && npm run dev"
+ 
