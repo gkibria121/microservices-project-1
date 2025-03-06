@@ -33,7 +33,7 @@ app.post("/api/posts", async (req: Request, res: Response) => {
 // Start server
 app.listen(port, async() => {
   console.log(`🚀 Server running on http://localhost:${port}`);
-  const {data} = await axios.get('http://event-bus-service:3000/api/events');
+  const {data} = await axios.get('http://event-bus:3000/api/events');
   console.log(data)
 });
 
